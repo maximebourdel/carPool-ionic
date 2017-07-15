@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Liste véhicules</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<ion-list>
+    <ion-item *ngFor="let vehicule of listVehicule">
+        <ion-thumbnail item-start>
+            <img src="./assets/vehicule/photo/{{ vehicule.immatriculation }}.jpg">
+        </ion-thumbnail>
+        <h2>{{ vehicule.immatriculation }} {{ vehicule.marque }}</h2>
+    
+        <p>{{ vehicule.kilometrage| number:'1.2-2' }} km</p>	
+	<p>{{ vehicule.ville }}</p>
+	<p> Resp : {{ vehicule.nom_responsable }}</p>
+        <p> Resp : {{ vehicule.nom_responsable }}</p>
+    </ion-item>
+</ion-list>
+
+</ion-content>

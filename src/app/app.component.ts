@@ -4,7 +4,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+
+import { VehiculeListComponent }	from '../pages/vehicule/vehicule-list.component';
+
+import { ReservationListComponent }  from '../pages/reservation/reservation-list.component';
+import { ReservationCreateComponent }  from '../pages/reservation/reservation-create.component';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,15 +18,17 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, icon: string,component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Home', icon: 'home', component: HomePage },
+	  { title: 'Liste véhicules', icon: 'car', component: VehiculeListComponent  },
+	  { title: 'Liste réservations', icon: 'calendar', component: ReservationListComponent  },
+	  { title: 'Nouvelle réservation', icon: 'calendar', component: ReservationCreateComponent  },
     ];
 
   }

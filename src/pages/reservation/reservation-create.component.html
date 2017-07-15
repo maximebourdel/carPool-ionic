@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Nouvelle Réservation</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <button ion-button color="light" (click)="gotoListReservation()">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Retour à la liste
+    </button>
+
+    
+    <h1>Nouvelle Réservation</h1>
+
+    <form (ngSubmit)="addReservation()" #reservationForm="ngForm">
+
+        <ion-list>
+
+            <ion-item>
+                <ion-label>Date de début de réservation</ion-label>
+                <ion-datetime 
+                        name ="dateDebut"
+                        displayFormat="YYYY-MM-DD" 
+                        pickerFormat="YYYY-MM-DD" 
+                        [(ngModel)]="reservation.date_debut"
+                        required
+                        min="{{today}}"
+                        #dateDebut="ngModel"
+                ></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Date de fin de réservation</ion-label>
+                <ion-datetime 
+                    name ="dateFin"
+                    displayFormat="YYYY-MM-DD" 
+                    pickerFormat="YYYY-MM-DD" 
+                    [(ngModel)]="reservation.date_fin"
+                    min="{{today}}"
+                    required
+                    #dateFin="ngModel"
+                ></ion-datetime>
+            </ion-item>  
+
+
+            <ion-item>
+                <ion-label>Véhicule</ion-label>
+                <ion-select  okText="OK" cancelText="ANNULER"
+                    [ngModel]="reservation.vehicule"
+                    (ngModelChange)="reservation.vehicule= $event" 
+                    required
+                    name= 'vehicule' 
+                >
+                    <ion-option *ngFor="let vehicule of listVehicule" [value]="vehicule">
+                        {{vehicule.immatriculation}} - {{vehicule.marque}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+			
+            <ion-item>
+            <ion-label fixed>Votre nom</ion-label>
+                <ion-input type="text" name="nom"
+                    required
+                    [(ngModel)]="reservation.nom" name="nom"
+                    #nom="ngModel"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed>Votre prénom</ion-label>
+                <ion-input type="text" name="prenom"
+                    required
+                    [(ngModel)]="reservation.prenom" name="prenom"
+                    #prenom="ngModel"
+                ></ion-input>
+            </ion-item>
+
+				
+        </ion-list>
+
+        <button type="submit" ion-button color="secondary" 
+            [disabled]="!reservationForm.form.valid"
+        >
+            Valider
+        </button>
+        <button type="button" ion-button color="light" 
+            (click)=" reservationForm.reset()"
+        >
+            Reset
+        </button>
+
+    </form>
+
+</ion-content>

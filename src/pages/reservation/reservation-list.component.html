@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Liste réservations</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <button ion-button color="secondary" (click)="gotoCreate()">
+        <ion-icon name="add"></ion-icon> Effectuer une réservation
+    </button>
+
+<ion-list>
+
+  </ion-list>
+
+    <h3>Créneaux par véhicules</h3>
+    <form [formGroup]="datesForm" (ngSubmit)="getCreneauxByAnneeMois()" >    
+        
+        <h4>Sélectionnez un mois et une année pour afficher les dispoinibilités des véhicules pour ce mois.</h4>
+
+        <ion-list>
+            <ion-item>
+                <ion-label>Année</ion-label> 
+                <ion-select formControlName="annee">
+                    <ion-option [value]="2017" >2017</ion-option>
+                </ion-select>
+            </ion-item>
+        
+            <ion-item>
+                <ion-label>Mois</ion-label>
+                <ion-select  
+                    okText="OK" cancelText="ANNULER"
+                    formControlName="mois"
+                >
+                    <ion-option [value]="1">Janvier</ion-option>
+                    <ion-option [value]="2">Fevrier</ion-option>
+                    <ion-option [value]="3">Mars</ion-option>
+                    <ion-option [value]="4">Avril</ion-option>
+                    <ion-option [value]="5">Mai</ion-option>
+                    <ion-option [value]="6">Juin</ion-option>
+                    <ion-option [value]="7">Juillet</ion-option>
+                    <ion-option [value]="8">Août</ion-option>
+                    <ion-option [value]="9">Septembre</ion-option>
+                    <ion-option [value]="10">Octobre</ion-option>
+                    <ion-option [value]="11">Novembre</ion-option>
+                    <ion-option [value]="12">Décembre</ion-option>
+                </ion-select>
+            </ion-item>
+            
+            
+            
+        </ion-list>
+        
+        <button type="submit" ion-button color="secondary">Valider</button>
+        
+    </form>
+    
+    <ion-item>
+        <ion-label>Ajuster les jours</ion-label> 
+        <ion-range min="1" max="31" dualKnobs="true" pin="true" [(ngModel)]="structure" color="blue">
+            <ion-icon range-left small name="calendar"></ion-icon>
+            <ion-icon range-right name="calendar"></ion-icon>
+        </ion-range>
+    </ion-item>
+    
+    <ion-item>
+        <table class="table" *ngIf="listCreneauxByAnneeMois" id="tableReservation">
+            <thead>
+                <tr>
+                    <th>Vehicule</th>
+                    <th *ngFor="let jour of listJours">{{jour}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let creneauxByAnneeMois of listCreneauxByAnneeMois">
+                    <td *ngFor="let elem of creneauxByAnneeMois" 
+                        [style.background]="color(elem)"
+
+                    >{{elem == 0 || elem == 1 ? '' : elem}}</td >
+                </tr>
+            </tbody>
+        </table>
+    </ion-item>
+    
+    <h3>Liste complète des réservations</h3>
+       
+    <ion-list>
+        <ion-item *ngFor="let reservation of listReservation">
+            <ion-thumbnail item-start>
+                <img src="./assets/vehicule/photo/{{ reservation.vehicule.immatriculation }}.jpg">
+            </ion-thumbnail>
+            <h2>{{ reservation.nom }} {{ reservation.prenom }}</h2>
+            <h3>{{ reservation.vehicule.immatriculation }} - {{ reservation.vehicule.marque }}</h3>  
+            <p>debut : {{ reservation.date_debut | amDateFormat: 'YYYY-MM-DD HH:mm' }}</p>
+            <p>fin : {{ reservation.date_fin | amDateFormat: 'YYYY-MM-DD HH:mm' }}</p>
+        </ion-item>
+    </ion-list>
+
+
+    
+    
+</ion-content>
+

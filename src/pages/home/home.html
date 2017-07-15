@@ -8,11 +8,33 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  
+<h1>Bienvenue sur l'application Carpool</h1>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+<ion-card>
+  <ion-card-header>
+    Sélectionnez une action à effectuer :
+  </ion-card-header>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-list>
+    <button ion-item (click)="gotoListVehicule()">
+      <ion-icon name="car" item-start></ion-icon>
+      Liste véhicules
+    </button>
+
+    <button ion-item (click)="gotoListReservation()">
+      <ion-icon name="calendar" item-start></ion-icon>
+      Liste réservations 
+    </button>
+
+    <button ion-item (click)="gotoCreateReservation()">
+      <ion-icon name="calendar" item-start></ion-icon>
+      Nouvelle réservation
+    </button>
+
+  </ion-list>
+</ion-card>
+
+
+  <button ion-button secondary menuToggle>Menu</button>
 </ion-content>
